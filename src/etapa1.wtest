@@ -1,0 +1,72 @@
+import dependencia.*
+import rodado.*
+
+describe "Test etapa 1"{
+	const deportes = new Dependencia(cantEmpleados =45)
+	const cultura = new Dependencia(cantEmpleados =31)
+	const cachito = new Corsa( color = "rojo")
+	
+	fixture{
+		deportes.agregarAFlota(cachito)
+		deportes.agregarAFlota(new Corsa(color = "azul"))
+		deportes.agregarAFlota(new Corsa(color = "verde"))
+		deportes.agregarAFlota(new Kwid(tieneTanqueAdicional=true))
+		deportes.agregarAFlota(new AutosEspeciales(capacidad= 5, velocidad= 160, peso = 1200, color= "beige"))
+		cultura.agregarAFlota(cachito)
+		cultura.agregarAFlota(new Kwid(tieneTanqueAdicional=true))
+		cultura.agregarAFlota(new Kwid(tieneTanqueAdicional=true))
+		cultura.agregarAFlota(new Kwid(tieneTanqueAdicional=false))
+		trafic.interior(interiorPopular)
+		trafic.motor(motorBataton)
+		cultura.agregarAFlota(trafic)
+	}
+	
+	test "peso total flota deportes"{
+		assert.equals(6450, deportes.pesoTotalFlota())
+	}
+	
+	test "peso total flota cultura"{
+		assert.equals(10700, cultura.pesoTotalFlota())
+	}
+	
+	test "esta bien equipada deportes"{
+		assert.that(deportes.estaBienEquipada())
+	}
+	
+	test "esta bien equipada cultura"{
+		assert.notThat(cultura.estaBienEquipada())
+	}
+	
+	test "capacidad total en color azul deportes"{
+		assert.equals(7, deportes.capacidadTotalEnColor("azul"))
+	}
+	
+	test "capacidad total en color azul cultura"{
+		assert.equals(10, cultura.capacidadTotalEnColor("azul"))
+	}
+	
+	test "color rodado mas rapido en deportes"{
+		assert.equals("beige", deportes.colorDelRodadoMasRapido())
+	}
+	
+	test "color rodado mas rapido en cultura"{
+		assert.equals("rojo", cultura.colorDelRodadoMasRapido())
+	}
+	
+	test "es grande la dependencia deportes"{
+		assert.that(deportes.esGrande())
+	}
+	
+	test "es grande la dependencia cultura"{
+		assert.notThat(cultura.esGrande())
+	}
+	
+	test "capacidad faltante de deportes"{
+		assert.equals(25, deportes.capacidadFaltante())
+	}
+	
+	test "capacidad faltante de cultura"{
+		assert.equals(5, cultura.capacidadFaltante())
+	}
+	
+}
