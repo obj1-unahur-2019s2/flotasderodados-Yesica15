@@ -1,0 +1,30 @@
+import pedidos.*
+import rodado.*
+
+describe "Test etapa2"{
+	const cachito = new Corsa( color = "rojo")
+	const autoEspecial = new AutosEspeciales(capacidad= 5, velocidad= 160, peso = 1200, color= "beige")
+	const pedido1 = new Pedido(distancia=960, tiempoMaximo= 8, cantPasajeros= 4, coloresIncompatibles =["azul", "negro"])
+	const pedido2 = new Pedido(distancia=960, tiempoMaximo= 8, cantPasajeros= 3, coloresIncompatibles =["azul", "negro", "rojo"]) 
+	const pedido3 = new Pedido(distancia=700, tiempoMaximo= 5, cantPasajeros= 5, coloresIncompatibles =["rojo"])
+	
+	test "cachito cumple el pedido 1"{
+		assert.that(pedido1.puedeSatisfacerPedido(cachito))		
+	}
+	
+	test "cachito cumple el pedido 2"{
+		assert.notThat(pedido2.puedeSatisfacerPedido(cachito))		
+	}
+	
+	test "cachito no cumple el pedido 1 si lo acelero 2 veces"{
+		pedido1.acelerar()
+		pedido1.acelerar()
+		assert.notThat(pedido1.puedeSatisfacerPedido(cachito))		
+	}
+	
+	test "el auto especial satisface los 3 pedidos"{
+		assert.that(pedido1.puedeSatisfacerPedido(autoEspecial))
+		assert.that(pedido2.puedeSatisfacerPedido(autoEspecial))
+		assert.that(pedido3.puedeSatisfacerPedido(autoEspecial))
+	}
+}
