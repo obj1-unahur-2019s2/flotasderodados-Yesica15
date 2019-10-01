@@ -12,7 +12,8 @@ class Pedido{
 	method satisfaceCapacidad(rodado) = cantPasajeros <= rodado.capacidad()
 	method velocidadRequeridad() = distancia/tiempoMaximo
 	method satisfaceVelocidad(rodado) = self.velocidadRequeridad()+10 <= rodado.velocidad()
-	method satisfaceColor(rodado) = coloresIncompatibles.all({color => color != rodado.color()})
+	method satisfaceColor(rodado) = not self.colorEsIncompatible(rodado.color())
 	method acelerar() { tiempoMaximo -=1 }
 	method relajar() { tiempoMaximo +=1 }
+	method colorEsIncompatible(color) = coloresIncompatibles.contains(color)
 }

@@ -1,12 +1,18 @@
 import rodado.*
+import pedidos.*
 
 class Dependencia{
 	const flota = []
+	const registroPedidos = []
 	var property cantEmpleados
 	
 	method agregarAFlota(rodado){ flota.add(rodado)}
 	
 	method quitarDeFlota(rodado){ flota.remove(rodado)}
+	
+	method agregarARegistro(pedido){ registroPedidos.add(pedido)}
+	
+	method quitarDeRegistro(pedido){ registroPedidos.remove(pedido)}
 	
 	method pesoTotalFlota() = flota.sum({rodado => rodado.peso()})
 	
@@ -33,4 +39,10 @@ class Dependencia{
 	method esGrandePorEmpleados() = cantEmpleados >= 40
 	
 	method esGrandePorTamanioFlota() = flota.size() >= 5
+	
+	method totalPasajerosRegistros() = registroPedidos.sum({pedido => pedido.cantPasajeros()})
+	
+	method todosRegistrosNoQuierenColor(color) = registroPedidos.all({pedido => pedido.colorEsIncompatible(color)})
+	
+	method relajarregistros() {registroPedidos.forEach({pedido => pedido.relajar()})}
 }
