@@ -45,4 +45,8 @@ class Dependencia{
 	method todosRegistrosNoQuierenColor(color) = registroPedidos.all({pedido => pedido.colorEsIncompatible(color)})
 	
 	method relajarregistros() {registroPedidos.forEach({pedido => pedido.relajar()})}
+	
+	method registrosNoSatisfechos() = registroPedidos.filter({pedido => not self.algunoSatisface(pedido)})
+	
+	method algunoSatisface(pedido) = flota.any({rodado => pedido.puedeSatisfacerPedido(rodado)})
 }
